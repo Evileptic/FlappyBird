@@ -8,6 +8,7 @@ namespace FlappyBird
         private EcsFilter<Bird> _birdFilter;
 
         private RuntimeData _runtime;
+        private UI _ui;
 
         public void Run()
         {
@@ -22,6 +23,8 @@ namespace FlappyBird
                     birdEntity.Get<JumpEvent>();
                     birdEntity.Get<MoveFlag>();
                     birdEntity.Get<RotationFlag>();
+
+                    _ui.GameScreen.Show();
 
                     _runtime.GameState = GameState.Play;
                 }

@@ -43,6 +43,7 @@ namespace FlappyBird
                 .Add(new GroundSpawnSystem())
                 .Add(new TubesSpawnSystem())
 
+                .Add(new ScoreCountSystem())
                 .Add(new LoseSystem())
 
                 .Inject(_audioPlayer)

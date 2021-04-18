@@ -16,5 +16,7 @@ namespace FlappyBird
         public float GroundWidth;
         public float GroundSpawnTrigger;
         public float TubesSpawnTrigger;
+
+        public int Scores;
     }
 }

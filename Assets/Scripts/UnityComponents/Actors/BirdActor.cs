@@ -17,7 +17,11 @@ namespace FlappyBird
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (!Entity.IsAlive()) return;
-            Entity.Get<LoseEvent>();
+
+            if (collision.TryGetComponent(out ScoreZoneActor scoreZone))
+                World.NewEntity().Get<ScoreCountEvent>();
+            else
+                Entity.Get<LoseEvent>();
         }
     }
 }

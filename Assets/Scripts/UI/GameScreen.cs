@@ -4,6 +4,6 @@ namespace FlappyBird
 {
     public class GameScreen : Screen
     {
-        public Slider ProgressSlider;
+        public Text ScoresText;
     }
 }
