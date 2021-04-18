@@ -16,7 +16,7 @@ namespace FlappyBird
             for (int i = 0; i < _static.TubesPoolSize; i++)
             {
                 var tube = Object.Instantiate(_static.TubesPrefab);
-                tube.transform.position = new Vector2(tubesXPosition, Random.Range(_static.MinYRandom, _static.MaxYRandom));
+                tube.transform.position = new Vector2(tubesXPosition, Random.Range(_static.TubesMinYRandom, _static.TubesMaxYRandom));
                 tubesXPosition += _static.TubesSpawnDistance;
 
                 _runtime.TubesPool.Enqueue(tube);
@@ -31,7 +31,7 @@ namespace FlappyBird
             {
                 var tubeForMove = _runtime.TubesPool.Dequeue();
                 float tubesXPosition = tubeForMove.transform.position.x + _static.TubesSpawnDistance * _static.TubesPoolSize;
-                tubeForMove.transform.position = new Vector2(tubesXPosition, Random.Range(_static.MinYRandom, _static.MaxYRandom));
+                tubeForMove.transform.position = new Vector2(tubesXPosition, Random.Range(_static.TubesMinYRandom, _static.TubesMaxYRandom));
 
                 _runtime.TubesPool.Enqueue(tubeForMove);
                 _runtime.TubesSpawnTrigger += _static.TubesSpawnDistance;

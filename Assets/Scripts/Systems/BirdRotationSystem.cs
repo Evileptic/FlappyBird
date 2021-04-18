@@ -13,9 +13,9 @@ namespace FlappyBird
         {
             foreach (var index in _rotationFilter)
             {
-                ref var bird = ref _rotationFilter.Get1(index);
                 var minRotation = Quaternion.Euler(0f, 0f, _static.BirdMinRotation);
-                bird.Transform.rotation = Quaternion.Lerp(bird.Transform.rotation, minRotation, _static.RotationSpeed * Time.deltaTime);
+                var birdTransform = _rotationFilter.Get1(index).Transform;
+                birdTransform.rotation = Quaternion.Lerp(birdTransform.rotation, minRotation, _static.BirdRotationSpeed * Time.deltaTime);
             }
         }
     }

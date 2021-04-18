@@ -11,31 +11,31 @@ namespace FlappyBird
         public float BirdMaxRotation;
         public float BirdMinRotation;
         public float BirdMoveSpeed;
-        public float RotationSpeed;
+        public float BirdRotationSpeed;
 
         [Header("Camera Props")]
         public float CameraXOffset;
 
         [Header("Ground Props")]
-        public int GroundPoolSize;
+        public int GroundPoolSize = 3;
 
         [Header("Tubes Props")]
-        public int TubesPoolSize;
+        public int TubesPoolSize = 3;
         public float TubesSpawnDistance;
         public float TubesStartSpawnOffset;
-        public float MaxYRandom;
-        public float MinYRandom;
+        public float TubesMaxYRandom;
+        public float TubesMinYRandom;
 
         [Header("Prefabs")]
         public AudioPlayer AudioPlayerPrefab;
-        public UI UIPrefab;
         public GameObject GroundPrefab;
         public GameObject TubesPrefab;
+        public UI UIPrefab;
 
         [Header("Audio Clips")]
-        public AudioClip Jump;
         public AudioClip Death;
         public AudioClip Score;
+        public AudioClip Jump;
         public AudioClip Hit;
     }
 }
