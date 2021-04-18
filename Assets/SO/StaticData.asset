@@ -20,6 +20,12 @@ MonoBehaviour:
   RotationSpeed: 1
   CameraXOffset: -1.5
   GroundPoolSize: 3
+  TubesPoolSize: 3
+  TubesSpawnDistance: 3
+  TubesStartSpawnOffset: 3
+  MaxYRandom: 3
+  MinYRandom: -2
   AudioPlayerPrefab: {fileID: 398429381671417088, guid: 04803b6c062e5b8448431778a4fe598b, type: 3}
   UIPrefab: {fileID: 7691685437204089913, guid: 95d0bd853838be542aab699cde00ee66, type: 3}
   GroundPrefab: {fileID: 1789890904519828911, guid: d47eb77224d3c7f4ca18262689e7a3fd, type: 3}
+  TubesPrefab: {fileID: 8658805016957629895, guid: 0dbd4c79b9a86e4499fc425da9e36edd, type: 3}

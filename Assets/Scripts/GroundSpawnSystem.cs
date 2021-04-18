@@ -11,9 +11,9 @@ namespace FlappyBird
 
         public void Init()
         {
-            var gorundPrefab = _static.GroundPrefab;
+            var groundPrefab = _static.GroundPrefab;
 
-            _runtime.GroundWidth = gorundPrefab.GetComponent<BoxCollider2D>().size.x * gorundPrefab.transform.localScale.x;
+            _runtime.GroundWidth = groundPrefab.GetComponent<BoxCollider2D>().size.x * groundPrefab.transform.localScale.x;
 
             float groundXPosition = 0f;
 

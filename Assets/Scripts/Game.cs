@@ -44,6 +44,7 @@ namespace FlappyBird
                 .Add(new CameraFollowSystem())
 
                 .Add(new GroundSpawnSystem())
+                .Add(new TubesSpawnSystem())
 
                 .Add(new LoseSystem())
 

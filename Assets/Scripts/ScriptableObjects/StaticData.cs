@@ -19,9 +19,17 @@ namespace FlappyBird
         [Header("Ground Props")]
         public int GroundPoolSize;
 
+        [Header("Tubes Props")]
+        public int TubesPoolSize;
+        public float TubesSpawnDistance;
+        public float TubesStartSpawnOffset;
+        public float MaxYRandom;
+        public float MinYRandom;
+
         [Header("Prefabs")]
         public AudioPlayer AudioPlayerPrefab;
         public UI UIPrefab;
         public GameObject GroundPrefab;
+        public GameObject TubesPrefab;
     }
 }

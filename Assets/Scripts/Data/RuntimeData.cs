@@ -12,7 +12,9 @@ namespace FlappyBird
         public Camera MainCamera;
 
         public Queue<GameObject> GroundPool = new Queue<GameObject>();
+        public Queue<GameObject> TubesPool = new Queue<GameObject>();
         public float GroundWidth;
         public float GroundSpawnTrigger;
+        public float TubesSpawnTrigger;
     }
 }
