@@ -8,7 +8,6 @@ namespace FlappyBird
     public class RuntimeData
     {
         public GameState GameState;
-        public AudioPlayer AudioPlayer;
         public Camera MainCamera;
 
         public Queue<GameObject> GroundPool = new Queue<GameObject>();

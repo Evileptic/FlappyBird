@@ -7,6 +7,7 @@ namespace FlappyBird
     {
         private EcsFilter<Bird, JumpEvent> _eventFilter;
 
+        private AudioPlayer _audioPlayer;
         private StaticData _static;
 
         public void Run()
@@ -18,6 +19,8 @@ namespace FlappyBird
                 bird.Rigidbody2D.velocity = new Vector2(bird.Rigidbody2D.velocity.x, 0f);
                 bird.Rigidbody2D.AddForce(Vector2.up * _static.BirdJumpForce, _static.BirdJumpForceType);
                 bird.Transform.rotation = Quaternion.Euler(0f, 0f, _static.BirdMaxRotation);
+
+                _audioPlayer.ChannelOne.PlayOneShot(_static.Jump);
 
                 _eventFilter.GetEntity(index).Del<JumpEvent>();
             }

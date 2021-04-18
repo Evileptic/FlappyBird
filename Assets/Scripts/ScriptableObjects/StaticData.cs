@@ -31,5 +31,11 @@ namespace FlappyBird
         public UI UIPrefab;
         public GameObject GroundPrefab;
         public GameObject TubesPrefab;
+
+        [Header("Audio Clips")]
+        public AudioClip Jump;
+        public AudioClip Death;
+        public AudioClip Score;
+        public AudioClip Hit;
     }
 }

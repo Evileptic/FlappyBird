@@ -29,3 +29,7 @@ MonoBehaviour:
   UIPrefab: {fileID: 7691685437204089913, guid: 95d0bd853838be542aab699cde00ee66, type: 3}
   GroundPrefab: {fileID: 1789890904519828911, guid: d47eb77224d3c7f4ca18262689e7a3fd, type: 3}
   TubesPrefab: {fileID: 8658805016957629895, guid: 0dbd4c79b9a86e4499fc425da9e36edd, type: 3}
+  Jump: {fileID: 8300000, guid: 7e1494c4704214c49bf113e54fcaf0d7, type: 3}
+  Death: {fileID: 8300000, guid: 24bbc7d3219fef44c8be8bcea0f3c052, type: 3}
+  Score: {fileID: 8300000, guid: 667c073ec053ca34480092e01ca6ca1a, type: 3}
+  Hit: {fileID: 8300000, guid: cc909612b98820742b360b93418deb4e, type: 3}
