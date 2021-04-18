@@ -16,8 +16,12 @@ namespace FlappyBird
         [Header("Camera Props")]
         public float CameraXOffset;
 
+        [Header("Ground Props")]
+        public int GroundPoolSize;
+
         [Header("Prefabs")]
         public AudioPlayer AudioPlayerPrefab;
         public UI UIPrefab;
+        public GameObject GroundPrefab;
     }
 }

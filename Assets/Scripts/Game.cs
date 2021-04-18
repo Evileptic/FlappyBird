@@ -43,6 +43,8 @@ namespace FlappyBird
 
                 .Add(new CameraFollowSystem())
 
+                .Add(new GroundSpawnSystem())
+
                 .Add(new LoseSystem())
 
                 .Inject(_audioPlayer)

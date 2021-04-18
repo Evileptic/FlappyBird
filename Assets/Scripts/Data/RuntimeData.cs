@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace FlappyBird
 {
@@ -9,5 +10,9 @@ namespace FlappyBird
         public GameState GameState;
         public AudioPlayer AudioPlayer;
         public Camera MainCamera;
+
+        public Queue<GameObject> GroundPool = new Queue<GameObject>();
+        public float GroundWidth;
+        public float GroundSpawnTrigger;
     }
 }
