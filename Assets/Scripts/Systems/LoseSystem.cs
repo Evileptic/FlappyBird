@@ -10,6 +10,7 @@ namespace FlappyBird
         private AudioPlayer _audioPlayer;
         private RuntimeData _runtime;
         private StaticData _static;
+        private UI _ui;
 
         public void Run()
         {
@@ -31,6 +32,9 @@ namespace FlappyBird
 
                 _audioPlayer.ChannelOne.PlayOneShot(_static.Death);
                 _audioPlayer.ChannelOne.PlayOneShot(_static.Hit, 0.7f);
+
+                _ui.GameScreen.Hide();
+                _ui.LoseScreen.Show();
 
                 _eventFilter.GetEntity(index).Del<LoseEvent>();
             }

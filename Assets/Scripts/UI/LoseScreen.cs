@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace FlappyBird
 {
@@ -13,7 +14,7 @@ namespace FlappyBird
 
         private void RestartLevel()
         {
-            
+            SceneManager.LoadScene(0);
         }
     }
 }
