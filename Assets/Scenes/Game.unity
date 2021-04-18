@@ -414,9 +414,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: BirdActor
       objectReference: {fileID: 0}
-    - target: {fileID: 5652685904053851909, guid: 55748eeb82fc10b4b81bc2098f78ffe1, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55748eeb82fc10b4b81bc2098f78ffe1, type: 3}
