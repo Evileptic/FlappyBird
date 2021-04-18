@@ -6,9 +6,13 @@ namespace FlappyBird
     public class InitializeSystem : IEcsInitSystem
     {
         private EcsWorld _world;
+        private RuntimeData _runtime;
 
         public void Init()
         {
+            // MainCamera reference cache
+            _runtime.MainCamera = Camera.main;
+
             // Initialize Actors
             var actors = Object.FindObjectsOfType<Actor>();
             foreach (var actor in actors)

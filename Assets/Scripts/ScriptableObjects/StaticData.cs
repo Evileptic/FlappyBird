@@ -13,6 +13,9 @@ namespace FlappyBird
         public float BirdMoveSpeed;
         public float RotationSpeed;
 
+        [Header("Camera Props")]
+        public float CameraXOffset;
+
         [Header("Prefabs")]
         public AudioPlayer AudioPlayerPrefab;
         public UI UIPrefab;

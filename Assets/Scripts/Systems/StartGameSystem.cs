@@ -7,15 +7,23 @@ namespace FlappyBird
         private EcsFilter<StartGameEvent> _eventFilter;
         private EcsFilter<Bird> _birdFilter;
 
+        private RuntimeData _runtime;
+
         public void Run()
         {
             foreach (var index in _eventFilter)
             {
                 foreach (var idx in _birdFilter)
                 {
+                    ref var bird = ref _birdFilter.Get1(idx);
+                    bird.Rigidbody2D.isKinematic = false;
+
                     var birdEntity = _birdFilter.GetEntity(idx);
+                    birdEntity.Get<JumpEvent>();
                     birdEntity.Get<MoveFlag>();
                     birdEntity.Get<RotationFlag>();
+
+                    _runtime.GameState = GameState.Play;
                 }
 
                 _eventFilter.GetEntity(index).Destroy();

@@ -16,7 +16,8 @@ MonoBehaviour:
   BirdJumpForceType: 0
   BirdMaxRotation: 30
   BirdMinRotation: -30
-  BirdMoveSpeed: 0
+  BirdMoveSpeed: 2
   RotationSpeed: 1
+  CameraXOffset: -1.5
   AudioPlayerPrefab: {fileID: 398429381671417088, guid: 04803b6c062e5b8448431778a4fe598b, type: 3}
   UIPrefab: {fileID: 7691685437204089913, guid: 95d0bd853838be542aab699cde00ee66, type: 3}

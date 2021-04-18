@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace FlappyBird
 {
+    [RequireComponent(typeof(SceneData))]
     sealed class Game : MonoBehaviour
     {
         EcsWorld _world;
@@ -10,6 +11,7 @@ namespace FlappyBird
         EcsSystems _fixedSystems;
 
         public StaticData _static;
+        public SceneData _scene;
 
         void Start()
         {
@@ -23,24 +25,30 @@ namespace FlappyBird
 #endif
             var _runtime = new RuntimeData();
 
+            if (_scene == null)
+                _scene = GetComponent<SceneData>();
+
             UI _ui = Instantiate(_static.UIPrefab);
             AudioPlayer _audioPlayer = Instantiate(_static.AudioPlayerPrefab);
 
             _systems
-                .Add(new InitializeSystem())                
+                .Add(new InitializeSystem())
 
-                .Add(new StartGameSystem())
                 .Add(new InputSystem())
+                .Add(new StartGameSystem())
 
                 .Add(new BirdMoveSystem())
                 .Add(new BirdJumpSystem())
                 .Add(new BirdRotationSystem())
+
+                .Add(new CameraFollowSystem())
 
                 .Add(new LoseSystem())
 
                 .Inject(_audioPlayer)
                 .Inject(_runtime)
                 .Inject(_static)
+                .Inject(_scene)
                 .Inject(_ui)
                 .Init();
 
