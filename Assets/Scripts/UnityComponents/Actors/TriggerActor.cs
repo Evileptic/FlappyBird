@@ -11,7 +11,7 @@ namespace FlappyBird
             Entity.Get<TriggerEvent>() = new TriggerEvent()
             {
                 Collider = other,
-                EventType = TriggerEventType.ENTER
+                EventType = TriggerEventType.Enter
             };
         }
 
@@ -21,7 +21,7 @@ namespace FlappyBird
             Entity.Get<TriggerEvent>() = new TriggerEvent()
             {
                 Collider = other,
-                EventType = TriggerEventType.STAY
+                EventType = TriggerEventType.Stay
             };
         }
 
@@ -31,7 +31,7 @@ namespace FlappyBird
             Entity.Get<TriggerEvent>() = new TriggerEvent()
             {
                 Collider = other,
-                EventType = TriggerEventType.EXIT
+                EventType = TriggerEventType.Exit
             };
         }
     }

@@ -2,9 +2,9 @@
 
 namespace FlappyBird
 {
-    public class PlayerTriggerSystem : IEcsRunSystem
+    public class BirdTriggerSystem : IEcsRunSystem
     {
-        private EcsFilter<Player, TriggerEvent> _triggerFilter;
+        private EcsFilter<Bird, TriggerEvent> _triggerFilter;
 
         public void Run()
         {
@@ -15,13 +15,13 @@ namespace FlappyBird
 
                 switch (trigger.EventType)
                 {
-                    case TriggerEventType.ENTER:
+                    case TriggerEventType.Enter:
 
                         break;
-                    case TriggerEventType.STAY:
+                    case TriggerEventType.Stay:
 
                         break;
-                    case TriggerEventType.EXIT:
+                    case TriggerEventType.Exit:
 
                         break;
                 }

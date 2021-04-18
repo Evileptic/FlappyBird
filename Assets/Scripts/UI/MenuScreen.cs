@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿using Leopotam.Ecs;
+using UnityEngine.UI;
 
 namespace FlappyBird
 {
@@ -13,6 +14,7 @@ namespace FlappyBird
 
         private void StartGame()
         {
+            World.NewEntity().Get<StartGameEvent>();
             Hide();
         }
     }

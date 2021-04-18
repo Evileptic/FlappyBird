@@ -2,7 +2,7 @@
 
 namespace FlappyBird
 {
-    public enum TriggerEventType { ENTER, STAY, EXIT }
+    public enum TriggerEventType { Enter, Stay, Exit }
 
     public struct TriggerEvent
     {

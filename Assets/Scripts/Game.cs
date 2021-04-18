@@ -30,7 +30,12 @@ namespace FlappyBird
                 .Add(new InitializeSystem())                
 
                 .Add(new StartGameSystem())
-               
+                .Add(new InputSystem())
+
+                .Add(new BirdMoveSystem())
+                .Add(new BirdJumpSystem())
+                .Add(new BirdRotationSystem())
+
                 .Add(new LoseSystem())
 
                 .Inject(_audioPlayer)
@@ -40,7 +45,7 @@ namespace FlappyBird
                 .Init();
 
             _fixedSystems
-                .Add(new PlayerTriggerSystem())
+                .Add(new BirdTriggerSystem())
                 .Init();
         }
 

@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d61642a386d81a44a790f181fdfcb53, type: 3}
   m_Name: StaticData
   m_EditorClassIdentifier: 
-  Levels: {fileID: 11400000, guid: 86f21e4841fc3fa4cbdfa5199d097e90, type: 2}
-  InputSensitivity: 0.1
-  MinSwipeLength: 150
+  BirdJumpForce: 200
+  BirdJumpForceType: 0
+  BirdMaxRotation: 30
+  BirdMinRotation: -30
+  BirdMoveSpeed: 0
+  RotationSpeed: 1
   AudioPlayerPrefab: {fileID: 398429381671417088, guid: 04803b6c062e5b8448431778a4fe598b, type: 3}
   UIPrefab: {fileID: 7691685437204089913, guid: 95d0bd853838be542aab699cde00ee66, type: 3}
