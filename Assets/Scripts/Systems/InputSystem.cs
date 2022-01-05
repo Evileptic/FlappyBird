@@ -5,15 +5,13 @@ namespace FlappyBird
 {
     public class InputSystem : IEcsRunSystem
     {
-        private EcsFilter<Bird> _birdFilter;
-
-        private RuntimeData _runtime;
+        private RuntimeData _runtimeData;
+        private SceneData _sceneData;
 
         public void Run()
         {
-            if (Input.GetMouseButtonDown(0) && _runtime.GameState == GameState.Play)
-                foreach (var index in _birdFilter)
-                    _birdFilter.GetEntity(index).Get<JumpEvent>();
+            if (Input.GetMouseButtonDown(0) && _runtimeData.GameState == GameState.Play)
+                _sceneData.BirdView.Entity.Get<JumpEvent>();
         }
     }
 }

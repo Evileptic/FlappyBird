@@ -4,22 +4,21 @@ namespace FlappyBird
 {
     public class ScoreCountSystem : IEcsRunSystem
     {
-        private EcsFilter<ScoreCountEvent> _eventFilter;
+        private EcsFilter<ScoreCountEvent> _scoreCountFilter;
 
-        private AudioPlayer _audioPlayer;
-        private RuntimeData _runtime;
-        private StaticData _static;
+        private RuntimeData _runtimeData;
+        private StaticData _staticData;
+        private SceneData _sceneData;
         private UI _ui;
 
         public void Run()
         {
-            foreach (var index in _eventFilter)
+            foreach (var index in _scoreCountFilter)
             {
-                _ui.GameScreen.ScoresText.text = (++_runtime.Scores).ToString();
+                _ui.GameScreen.ScoresText.text = (++_runtimeData.Scores).ToString();
+                _sceneData.AudioSource.PlayOneShot(_staticData.Score);
 
-                _audioPlayer.ChannelOne.PlayOneShot(_static.Score, 0.5f);
-
-                _eventFilter.GetEntity(index).Destroy();
+                _scoreCountFilter.GetEntity(index).Destroy();
             }
         }
     }

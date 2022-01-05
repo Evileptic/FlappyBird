@@ -5,18 +5,22 @@ namespace FlappyBird
 {
     public class CameraFollowSystem : IEcsRunSystem
     {
-        private RuntimeData _runtime;
-        private StaticData _static;
-        private SceneData _scene;
+        private RuntimeData _runtimeData;
+        private StaticData _staticData;
+        private SceneData _sceneData;
 
         public void Run()
         {
-            if (_runtime.GameState == GameState.Lose) return;
+            if (_runtimeData.GameState == GameState.Lose) return;
 
-            var camera = _runtime.MainCamera;
-            var bird = _scene.Bird;
-            var cameraPosition = new Vector3(bird.transform.position.x - _static.CameraXOffset, camera.transform.position.y, camera.transform.position.z);
-            camera.transform.position = cameraPosition;
+            var camera = _runtimeData.MainCamera;
+            var bird = _sceneData.BirdView;
+            var cameraTransform = camera.transform;
+            var cameraPosition = new Vector3(
+                bird.transform.position.x - _staticData.CameraXOffset, 
+                cameraTransform.position.y, 
+                cameraTransform.position.z);
+            cameraTransform.position = cameraPosition;
         }
     }
 }

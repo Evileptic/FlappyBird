@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace FlappyBird
 {
     public enum GameState { Menu, Play, Lose }
 
+    [Serializable]
     public class RuntimeData
     {
         public GameState GameState;

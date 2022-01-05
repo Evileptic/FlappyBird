@@ -27,7 +27,6 @@ namespace FlappyBird
         public float TubesMinYRandom;
 
         [Header("Prefabs")]
-        public AudioPlayer AudioPlayerPrefab;
         public GameObject GroundPrefab;
         public GameObject TubesPrefab;
         public UI UIPrefab;

@@ -4,9 +4,9 @@ using UnityEngine;
 namespace FlappyBird
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class BirdActor : Actor
+    public class BirdView : View
     {
-        public override void ExpandEntity(EcsEntity entity)
+        protected override void ExpandEntity(EcsEntity entity)
         {
             entity.Get<Bird>() = new Bird()
             {
@@ -18,7 +18,7 @@ namespace FlappyBird
         {
             if (!Entity.IsAlive()) return;
 
-            if (collision.TryGetComponent(out ScoreZoneActor scoreZone))
+            if (collision.TryGetComponent(out ScoreZoneView scoreZone))
                 World.NewEntity().Get<ScoreCountEvent>();
             else
                 Entity.Get<LoseEvent>();

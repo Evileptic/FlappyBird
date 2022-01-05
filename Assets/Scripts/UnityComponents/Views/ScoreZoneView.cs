@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlappyBird
 {
-    public class ScoreZoneActor : MonoBehaviour
+    public class ScoreZoneView : MonoBehaviour
     {
 
     }

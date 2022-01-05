@@ -5,12 +5,12 @@ namespace FlappyBird
 {
     public class Screen : MonoBehaviour
     {
-        public EcsWorld World;
+        protected EcsWorld World;
 
         public void InjectWorld(EcsWorld world) => World = world;
 
-        public virtual void Show() => gameObject.SetActive(true);
+        public void Show() => gameObject.SetActive(true);
 
-        public virtual void Hide() => gameObject.SetActive(false);
+        public void Hide() => gameObject.SetActive(false);
     }
 }

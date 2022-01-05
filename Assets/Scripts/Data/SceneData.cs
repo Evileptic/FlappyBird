@@ -4,6 +4,7 @@ namespace FlappyBird
 {
     public class SceneData : MonoBehaviour
     {
-        public BirdActor Bird;
+        public AudioSource AudioSource;
+        public BirdView BirdView;
     }
 }

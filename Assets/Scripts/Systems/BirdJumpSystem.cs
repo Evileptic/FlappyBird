@@ -5,24 +5,24 @@ namespace FlappyBird
 {
     public class BirdJumpSystem : IEcsRunSystem
     {
-        private EcsFilter<Bird, JumpEvent> _eventFilter;
-
-        private AudioPlayer _audioPlayer;
-        private StaticData _static;
+        private EcsFilter<Bird, JumpEvent> _jumpEventFilter;
+        
+        private StaticData _staticData;
+        private SceneData _sceneData;
 
         public void Run()
         {
-            foreach (var index in _eventFilter)
+            foreach (var index in _jumpEventFilter)
             {
-                ref var bird = ref _eventFilter.Get1(index);
+                ref var birdComp = ref _jumpEventFilter.Get1(index);
 
-                bird.Rigidbody2D.velocity = new Vector2(bird.Rigidbody2D.velocity.x, 0f);
-                bird.Rigidbody2D.AddForce(Vector2.up * _static.BirdJumpForce, _static.BirdJumpForceType);
-                bird.Transform.rotation = Quaternion.Euler(0f, 0f, _static.BirdMaxRotation);
+                birdComp.Rigidbody2D.velocity = new Vector2(birdComp.Rigidbody2D.velocity.x, 0f);
+                birdComp.Rigidbody2D.AddForce(Vector2.up * _staticData.BirdJumpForce, _staticData.BirdJumpForceType);
+                birdComp.Transform.rotation = Quaternion.Euler(0f, 0f, _staticData.BirdMaxRotation);
 
-                _audioPlayer.ChannelOne.PlayOneShot(_static.Jump);
+                _sceneData.AudioSource.PlayOneShot(_staticData.Jump);
 
-                _eventFilter.GetEntity(index).Del<JumpEvent>();
+                _jumpEventFilter.GetEntity(index).Del<JumpEvent>();
             }
         }
     }

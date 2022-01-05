@@ -7,15 +7,14 @@ namespace FlappyBird
     {
         private EcsFilter<Bird, MoveFlag> _moveFilter;
 
-        private StaticData _static;
+        private StaticData _staticData;
 
         public void Run()
         {
             foreach (var index in _moveFilter)
             {
-                ref var bird = ref _moveFilter.Get1(index);
-
-                bird.Rigidbody2D.velocity = new Vector2(_static.BirdMoveSpeed, bird.Rigidbody2D.velocity.y);
+                var birdRigidBody = _moveFilter.Get1(index).Rigidbody2D;
+                birdRigidBody.velocity = new Vector2(_staticData.BirdMoveSpeed, birdRigidBody.velocity.y);
             }
         }
     }

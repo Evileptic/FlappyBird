@@ -5,38 +5,39 @@ namespace FlappyBird
 {
     public class LoseSystem : IEcsRunSystem
     {
-        private EcsFilter<Bird, LoseEvent> _eventFilter;
+        private EcsFilter<Bird, LoseEvent> _loseEventFilter;
 
-        private AudioPlayer _audioPlayer;
-        private RuntimeData _runtime;
-        private StaticData _static;
+        private RuntimeData _runtimeData;
+        private StaticData _staticData;
+        private SceneData _sceneData;
         private UI _ui;
 
         public void Run()
         {
-            foreach (var index in _eventFilter)
+            foreach (var index in _loseEventFilter)
             {
-                if (_runtime.GameState != GameState.Play)
+                if (_runtimeData.GameState != GameState.Play)
                 {
-                    _eventFilter.GetEntity(index).Del<LoseEvent>();
+                    _loseEventFilter.GetEntity(index).Del<LoseEvent>();
                     return;
                 }
 
-                _runtime.GameState = GameState.Lose;
+                _runtimeData.GameState = GameState.Lose;
 
-                var birdEntity = _eventFilter.GetEntity(index);
+                var birdEntity = _loseEventFilter.GetEntity(index);
                 birdEntity.Del<MoveFlag>();
 
-                ref var bird = ref _eventFilter.Get1(index);
-                bird.Rigidbody2D.velocity = new Vector2(0f, bird.Rigidbody2D.velocity.y);
+                var birdRigidBody = _loseEventFilter.Get1(index).Rigidbody2D;
+                birdRigidBody.velocity = new Vector2(0f, birdRigidBody.velocity.y);
 
-                _audioPlayer.ChannelOne.PlayOneShot(_static.Death);
-                _audioPlayer.ChannelOne.PlayOneShot(_static.Hit, 0.7f);
+                var audioSource = _sceneData.AudioSource;
+                audioSource.PlayOneShot(_staticData.Death);
+                audioSource.PlayOneShot(_staticData.Hit);
 
                 _ui.GameScreen.Hide();
                 _ui.LoseScreen.Show();
 
-                _eventFilter.GetEntity(index).Del<LoseEvent>();
+                _loseEventFilter.GetEntity(index).Del<LoseEvent>();
             }
         }
     }

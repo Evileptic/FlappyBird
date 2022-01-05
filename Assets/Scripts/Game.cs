@@ -6,50 +6,41 @@ namespace FlappyBird
     [RequireComponent(typeof(SceneData))]
     sealed class Game : MonoBehaviour
     {
-        EcsWorld _world;
-        EcsSystems _systems;
+        private EcsWorld _ecsWorld;
+        private EcsSystems _systems;
 
-        public StaticData _static;
-        public SceneData _scene;
+        [SerializeField] private StaticData _staticData;
+        [SerializeField] private SceneData _sceneData;
+        [SerializeField] private RuntimeData _runtimeData;
 
         void Start()
         {
-            _world = new EcsWorld();
-            _systems = new EcsSystems(_world);
+            _ecsWorld = new EcsWorld();
+            _systems = new EcsSystems(_ecsWorld);
 #if UNITY_EDITOR
-            Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
+            Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_ecsWorld);
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
 #endif
-            var _runtime = new RuntimeData();
+            _runtimeData = new RuntimeData();
+            _sceneData = GetComponent<SceneData>();
 
-            if (_scene == null)
-                _scene = GetComponent<SceneData>();
-
-            UI _ui = Instantiate(_static.UIPrefab);
-            AudioPlayer _audioPlayer = Instantiate(_static.AudioPlayerPrefab);
+            UI _ui = Instantiate(_staticData.UIPrefab);
 
             _systems
                 .Add(new InitializeSystem())
-
                 .Add(new InputSystem())
                 .Add(new StartGameSystem())
-
                 .Add(new BirdMoveSystem())
                 .Add(new BirdJumpSystem())
                 .Add(new BirdRotationSystem())
-
                 .Add(new CameraFollowSystem())
-
                 .Add(new GroundSpawnSystem())
                 .Add(new TubesSpawnSystem())
-
                 .Add(new ScoreCountSystem())
                 .Add(new LoseSystem())
-
-                .Inject(_audioPlayer)
-                .Inject(_runtime)
-                .Inject(_static)
-                .Inject(_scene)
+                .Inject(_runtimeData)
+                .Inject(_staticData)
+                .Inject(_sceneData)
                 .Inject(_ui)
                 .Init();
         }
@@ -62,8 +53,8 @@ namespace FlappyBird
             {
                 _systems.Destroy();
                 _systems = null;
-                _world.Destroy();
-                _world = null;
+                _ecsWorld.Destroy();
+                _ecsWorld = null;
             }
         }
     }
