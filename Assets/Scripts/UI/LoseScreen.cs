@@ -1,7 +1,7 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace FlappyBird
+namespace FlappyBird.UI
 {
     public class LoseScreen : Screen
     {

@@ -1,21 +1,9 @@
-﻿using Leopotam.Ecs;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 
-namespace FlappyBird
+namespace FlappyBird.UI
 {
     public class MenuScreen : Screen
     {
         public Button StartGameButton;
-
-        private void Start()
-        {
-            StartGameButton.onClick.AddListener(StartGame);
-        }
-
-        private void StartGame()
-        {
-            World.NewEntity().Get<StartGameEvent>();
-            Hide();
-        }
     }
 }

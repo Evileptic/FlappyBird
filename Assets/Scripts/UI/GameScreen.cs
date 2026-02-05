@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UI;
 
-namespace FlappyBird
+namespace FlappyBird.UI
 {
     public class GameScreen : Screen
     {

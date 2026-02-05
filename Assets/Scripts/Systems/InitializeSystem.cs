@@ -1,24 +1,23 @@
-﻿using Leopotam.Ecs;
+﻿using FlappyBird.Data;
+using Leopotam.Ecs;
 using UnityEngine;
 
-namespace FlappyBird
+namespace FlappyBird.Systems
 {
     public class InitializeSystem : IEcsInitSystem
     {
         private EcsWorld _ecsWorld;
-        private RuntimeData _runtimeData;
+        private SceneData _sceneData;
 
         public void Init()
         {
-            _runtimeData.MainCamera = Camera.main;
-
-            var actors = Object.FindObjectsOfType<View>();
+            // Cache camera reference
+            _sceneData.MainCamera = Camera.main;
+            
+            // Find all actors in the scene and initialize them
+            var actors = Object.FindObjectsByType<Actor>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (var actor in actors)
                 actor.Init(_ecsWorld);
-
-            var screens = Object.FindObjectsOfType<Screen>();
-            foreach (var screen in screens)
-                screen.InjectWorld(_ecsWorld);
         }
     }
 }

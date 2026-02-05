@@ -1,23 +1,25 @@
-﻿using Leopotam.Ecs;
+﻿using FlappyBird.Data;
+using FlappyBird.SO;
+using Leopotam.Ecs;
 using UnityEngine;
 
-namespace FlappyBird
+namespace FlappyBird.Systems
 {
     public class CameraFollowSystem : IEcsRunSystem
     {
         private RuntimeData _runtimeData;
-        private StaticData _staticData;
+        private GameConfig _gameConfig;
         private SceneData _sceneData;
 
         public void Run()
         {
             if (_runtimeData.GameState == GameState.Lose) return;
 
-            var camera = _runtimeData.MainCamera;
-            var bird = _sceneData.BirdView;
+            var camera = _sceneData.MainCamera;
+            var bird = _sceneData.BirdActor;
             var cameraTransform = camera.transform;
             var cameraPosition = new Vector3(
-                bird.transform.position.x - _staticData.CameraXOffset, 
+                bird.transform.position.x - _gameConfig.CameraXOffset, 
                 cameraTransform.position.y, 
                 cameraTransform.position.z);
             cameraTransform.position = cameraPosition;

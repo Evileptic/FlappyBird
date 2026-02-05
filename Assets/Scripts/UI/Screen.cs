@@ -1,16 +1,17 @@
-﻿using Leopotam.Ecs;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace FlappyBird
 {
     public class Screen : MonoBehaviour
     {
-        protected EcsWorld World;
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
 
-        public void InjectWorld(EcsWorld world) => World = world;
-
-        public void Show() => gameObject.SetActive(true);
-
-        public void Hide() => gameObject.SetActive(false);
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

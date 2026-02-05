@@ -1,24 +1,26 @@
-﻿using Leopotam.Ecs;
+﻿using FlappyBird.Comps.Events;
+using FlappyBird.Data;
+using FlappyBird.SO;
+using FlappyBird.UI;
+using Leopotam.Ecs;
 
-namespace FlappyBird
+namespace FlappyBird.Systems
 {
     public class ScoreCountSystem : IEcsRunSystem
     {
-        private EcsFilter<ScoreCountEvent> _scoreCountFilter;
+        private EcsFilter<ScoreCountEvent> _scoreCountEventFilter;
 
         private RuntimeData _runtimeData;
-        private StaticData _staticData;
+        private GameConfig _gameConfig;
         private SceneData _sceneData;
-        private UI _ui;
+        private GameWindow _gameWindow;
 
         public void Run()
         {
-            foreach (var index in _scoreCountFilter)
+            foreach (var eventIndex in _scoreCountEventFilter)
             {
-                _ui.GameScreen.ScoresText.text = (++_runtimeData.Scores).ToString();
-                _sceneData.AudioSource.PlayOneShot(_staticData.Score);
-
-                _scoreCountFilter.GetEntity(index).Destroy();
+                _gameWindow.GameScreen.ScoresText.text = (++_runtimeData.Score).ToString();
+                _sceneData.AudioSource.PlayOneShot(_gameConfig.Score);
             }
         }
     }

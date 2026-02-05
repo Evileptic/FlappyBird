@@ -1,16 +1,23 @@
-﻿using Leopotam.Ecs;
+﻿using FlappyBird.Comps.Actors;
+using FlappyBird.Comps.Events;
+using FlappyBird.Comps.Flags;
+using FlappyBird.Comps.Refs;
+using FlappyBird.Data;
+using FlappyBird.SO;
+using FlappyBird.UI;
+using Leopotam.Ecs;
 using UnityEngine;
 
-namespace FlappyBird
+namespace FlappyBird.Systems
 {
     public class LoseSystem : IEcsRunSystem
     {
-        private EcsFilter<Bird, LoseEvent> _loseEventFilter;
+        private EcsFilter<Bird, Rigidbody2DRef, LoseEvent> _loseEventFilter;
 
         private RuntimeData _runtimeData;
-        private StaticData _staticData;
+        private GameConfig _gameConfig;
         private SceneData _sceneData;
-        private UI _ui;
+        private GameWindow _gameWindow;
 
         public void Run()
         {
@@ -27,17 +34,15 @@ namespace FlappyBird
                 var birdEntity = _loseEventFilter.GetEntity(index);
                 birdEntity.Del<MoveFlag>();
 
-                var birdRigidBody = _loseEventFilter.Get1(index).Rigidbody2D;
-                birdRigidBody.velocity = new Vector2(0f, birdRigidBody.velocity.y);
+                var birdRigidBody = _loseEventFilter.Get2(index).Value;
+                birdRigidBody.linearVelocity = new Vector2(0f, birdRigidBody.linearVelocity.y);
 
                 var audioSource = _sceneData.AudioSource;
-                audioSource.PlayOneShot(_staticData.Death);
-                audioSource.PlayOneShot(_staticData.Hit);
+                audioSource.PlayOneShot(_gameConfig.Death);
+                audioSource.PlayOneShot(_gameConfig.Hit);
 
-                _ui.GameScreen.Hide();
-                _ui.LoseScreen.Show();
-
-                _loseEventFilter.GetEntity(index).Del<LoseEvent>();
+                _gameWindow.GameScreen.Hide();
+                _gameWindow.LoseScreen.Show();
             }
         }
     }

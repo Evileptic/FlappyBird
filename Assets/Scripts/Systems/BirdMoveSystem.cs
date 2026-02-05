@@ -1,20 +1,24 @@
-﻿using Leopotam.Ecs;
+﻿using FlappyBird.Comps.Actors;
+using FlappyBird.Comps.Flags;
+using FlappyBird.Comps.Refs;
+using FlappyBird.SO;
+using Leopotam.Ecs;
 using UnityEngine;
 
-namespace FlappyBird
+namespace FlappyBird.Systems
 {
     public class BirdMoveSystem : IEcsRunSystem
     {
-        private EcsFilter<Bird, MoveFlag> _moveFilter;
+        private EcsFilter<Bird, Rigidbody2DRef, MoveFlag> _moveFilter;
 
-        private StaticData _staticData;
+        private GameConfig _gameConfig;
 
         public void Run()
         {
             foreach (var index in _moveFilter)
             {
-                var birdRigidBody = _moveFilter.Get1(index).Rigidbody2D;
-                birdRigidBody.velocity = new Vector2(_staticData.BirdMoveSpeed, birdRigidBody.velocity.y);
+                var birdRigidBody = _moveFilter.Get2(index).Value;
+                birdRigidBody.linearVelocity = new Vector2(_gameConfig.BirdMoveSpeed, birdRigidBody.linearVelocity.y);
             }
         }
     }

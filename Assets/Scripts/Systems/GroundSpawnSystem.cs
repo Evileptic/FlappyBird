@@ -1,45 +1,75 @@
-﻿using Leopotam.Ecs;
+﻿using System.Collections.Generic;
+using FlappyBird.Monos.Views;
+using FlappyBird.Data;
+using FlappyBird.SO;
+using Leopotam.Ecs;
 using UnityEngine;
 
-namespace FlappyBird
+namespace FlappyBird.Systems
 {
-    public class GroundSpawnSystem : IEcsInitSystem, IEcsRunSystem
+    public sealed class GroundSpawnSystem : IEcsInitSystem, IEcsRunSystem
     {
         private RuntimeData _runtimeData;
-        private StaticData _staticData;
+        private GameConfig _gameConfig;
         private SceneData _sceneData;
 
+        private readonly Queue<GroundView> _groundPool = new();
+        private float _groundWidth;
+        private float _groundSpawnTrigger;
+        
         public void Init()
         {
-            var groundPrefab = _staticData.GroundPrefab;
-
-            _runtimeData.GroundWidth = groundPrefab.GetComponent<BoxCollider2D>().size.x * groundPrefab.transform.localScale.x;
-
-            float groundXPosition = 0f;
-
-            for (int i = 0; i < _staticData.GroundPoolSize; i++)
-            {
-                var ground = Object.Instantiate(_staticData.GroundPrefab);
-                ground.transform.position = new Vector2(groundXPosition, ground.transform.position.y);
-                groundXPosition += _runtimeData.GroundWidth;
-
-                _runtimeData.GroundPool.Enqueue(ground);
-            }
-
-            _runtimeData.GroundSpawnTrigger = _runtimeData.GroundWidth;
+            _groundWidth = CalculateGroundWidth(_gameConfig.GroundPrefab);
+            InitializeGroundPool(_gameConfig.GroundPrefab, _gameConfig.GroundPoolSize, _groundWidth);
+            _groundSpawnTrigger = _groundWidth;
         }
 
         public void Run()
         {
-            if (_sceneData.BirdView.transform.position.x >= _runtimeData.GroundSpawnTrigger)
-            {
-                var groundForMove = _runtimeData.GroundPool.Dequeue();
-                float groundXPosition = groundForMove.transform.position.x + _runtimeData.GroundWidth * _staticData.GroundPoolSize;
-                groundForMove.transform.position = new Vector2(groundXPosition, groundForMove.transform.position.y);
+            if (!IsNeedSpawn(_sceneData.BirdActor.transform.position.x, _groundSpawnTrigger))
+                return;
 
-                _runtimeData.GroundPool.Enqueue(groundForMove);
-                _runtimeData.GroundSpawnTrigger += _runtimeData.GroundWidth;
+            MoveOldestTileToEnd();
+            _groundSpawnTrigger += _groundWidth;
+        }
+
+        private static float CalculateGroundWidth(GroundView groundPrefab)
+        {
+            var collider = groundPrefab.BoxCollider;
+            return collider.size.x * groundPrefab.transform.localScale.x;
+        }
+
+        private void InitializeGroundPool(GroundView groundPrefab, int poolSize, float tileWidth)
+        {
+            _groundPool.Clear();
+
+            float x = 0f;
+            for (int i = 0; i < poolSize; i++)
+            {
+                var tile = Object.Instantiate(groundPrefab);
+                SetX(tile.transform, x);
+                x += tileWidth;
+
+                _groundPool.Enqueue(tile);
             }
+        }
+
+        private static bool IsNeedSpawn(float birdX, float triggerX) => birdX >= triggerX;
+
+        private void MoveOldestTileToEnd()
+        {
+            var tile = _groundPool.Dequeue();
+            float newX = tile.transform.position.x + _groundWidth * _gameConfig.GroundPoolSize;
+            SetX(tile.transform, newX);
+
+            _groundPool.Enqueue(tile);
+        }
+
+        private static void SetX(Transform transform, float x)
+        {
+            var pos = transform.position;
+            pos.x = x;
+            transform.position = pos;
         }
     }
 }

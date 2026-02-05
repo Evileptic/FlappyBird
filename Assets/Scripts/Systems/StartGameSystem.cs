@@ -1,29 +1,36 @@
-﻿using Leopotam.Ecs;
+﻿using FlappyBird.Comps.Events;
+using FlappyBird.Comps.Flags;
+using FlappyBird.Comps.Refs;
+using FlappyBird.Data;
+using FlappyBird.UI;
+using Leopotam.Ecs;
+using UnityEngine;
 
-namespace FlappyBird
+namespace FlappyBird.Systems
 {
-    public class StartGameSystem : IEcsRunSystem
+    public class StartGameSystem : IEcsInitSystem
     {
-        private EcsFilter<StartGameEvent> _startGameEventFilter;
-
         private RuntimeData _runtimeData;
         private SceneData _sceneData;
-        private UI _ui;
+        private GameWindow _gameWindow;
 
-        public void Run()
+        public void Init()
         {
-            foreach (var index in _startGameEventFilter)
-            {
-                var birdEntity = _sceneData.BirdView.Entity;
-                birdEntity.Get<JumpEvent>();
-                birdEntity.Get<MoveFlag>();
-                birdEntity.Get<RotationFlag>();
-                _sceneData.BirdView.Entity.Get<Bird>().Rigidbody2D.isKinematic = false;
-                _ui.GameScreen.Show();
-                _runtimeData.GameState = GameState.Play;
+            _gameWindow.MenuScreen.StartGameButton.onClick.AddListener(StartGame);
+        }
 
-                _startGameEventFilter.GetEntity(index).Destroy();
-            }
+        private void StartGame()
+        {
+            // The bird entity can be fetched via a scene data reference (not via an ECS filter)
+            var birdEntity = _sceneData.BirdActor.GetEntity;
+            birdEntity.Get<JumpEvent>();
+            birdEntity.Get<MoveFlag>();
+            birdEntity.Get<RotationFlag>();
+            birdEntity.Get<Rigidbody2DRef>().Value.bodyType = RigidbodyType2D.Dynamic;
+            
+            _gameWindow.MenuScreen.Hide();
+            _gameWindow.GameScreen.Show();
+            _runtimeData.GameState = GameState.Play;
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
-namespace FlappyBird
+namespace FlappyBird.Data
 {
     public class SceneData : MonoBehaviour
     {
+        public Camera MainCamera;
         public AudioSource AudioSource;
-        public BirdView BirdView;
+        public BirdActor BirdActor;
     }
 }
